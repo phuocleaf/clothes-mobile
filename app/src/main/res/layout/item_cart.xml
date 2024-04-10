@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="10dp"
+
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="#CCE1E4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:id="@+id/imgClothes"
+            android:src="@drawable/imgsplash"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtClothesName"
+            android:text="Gà Chiên Nước Mắm"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imgClothes"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtClothesPrice"
+            android:text="50000"
+            app:layout_constraintTop_toBottomOf="@id/txtClothesName"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imgClothes"
+            />
+
+        <Spinner
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerClothesSize"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/txtClothesPrice"
+            app:layout_constraintTop_toBottomOf="@id/txtClothesName"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/imgsub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_remove_24"
+
+            app:layout_constraintTop_toBottomOf="@id/txtClothesName"
+            app:layout_constraintEnd_toStartOf="@id/txtquantity"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            />
+
+        <TextView
+            android:id="@+id/txtquantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/txtClothesName"
+            app:layout_constraintEnd_toStartOf="@id/imgadd"
+            android:layout_marginRight="10dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/imgadd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_add_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtClothesName"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.cardview.widget.CardView>
