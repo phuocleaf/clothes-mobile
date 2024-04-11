@@ -1,5 +1,7 @@
 package com.example.clothesapp.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.clothesapp.model.SignUpResponse
 import com.example.clothesapp.model.UserSignUpData
@@ -9,7 +11,7 @@ import retrofit2.Response
 
 class SignUpViewModel(): ViewModel() {
 
-    private var isSignUp: Boolean = false
+    private var isSignUp = MutableLiveData<Boolean>()
 
     fun signUp(name: String, email: String, password: String, phone: String, address: String) {
         val userSignUpData = UserSignUpData(name, email, password, phone, address)
@@ -19,17 +21,17 @@ class SignUpViewModel(): ViewModel() {
                 response: Response<SignUpResponse>
             ) {
                 response.body()?.let { signUpResponse ->
-                    isSignUp = signUpResponse.isSignUp
+                    isSignUp.value = signUpResponse.isSignUp
                 }
             }
 
             override fun onFailure(call: retrofit2.Call<SignUpResponse>, t: Throwable) {
-                isSignUp = false
+                isSignUp.value = false
             }
         })
     }
 
-    fun observeSignUpStatus(): Boolean {
+    fun observeSignUpStatus(): LiveData<Boolean> {
         return isSignUp
     }
 
