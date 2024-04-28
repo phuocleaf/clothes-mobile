@@ -12,6 +12,7 @@ import com.example.clothesapp.databinding.ActivitySignInBinding
 import com.example.clothesapp.model.SignInResponse
 import com.example.clothesapp.viewmodel.SignInViewModel
 import io.paperdb.Paper
+import kotlinx.coroutines.delay
 
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: ActivitySignInBinding
@@ -46,7 +47,7 @@ class SignInActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             } else{
-                Toast.makeText(this, "Email hoặc mật khẩu không đúng", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "có lỗi xảy ra", Toast.LENGTH_LONG).show()
             }
         }
         viewModel.observerSignInResponseData().observe(this, signInObserver)

@@ -33,7 +33,12 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener{
 
-            viewModel.signUp(binding.etname.text.toString(),binding.etemail.text.toString(),binding.etpassword.text.toString(),binding.etaddress.text.toString(),binding.etphone.text.toString())
+            viewModel.signUp(
+                binding.etname.text.toString(),
+                binding.etemail.text.toString(),
+                binding.etpassword.text.toString(),
+                binding.etphone.text.toString(),
+                binding.etaddress.text.toString())
             observeSignUpStatus()
 
         }

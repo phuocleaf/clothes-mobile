@@ -1,6 +1,7 @@
 package com.example.clothesapp.ui.fragment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.clothesapp.databinding.FragmentCartBinding
 import com.example.clothesapp.model.Cart
 import com.example.clothesapp.onclick.ChangeNumListener
 import com.example.clothesapp.onclick.ChangeSizeInterface
+import com.example.clothesapp.ui.DeliveryInformationActivity
 import io.paperdb.Paper
 import java.util.Objects
 
@@ -98,17 +100,19 @@ class CartFragment : Fragment() {
 
         }, object : ChangeSizeInterface {
             override fun changeSize(position: Int, size: String) {
-                //cartList[position].Size = size
                 var isExist = false
-
-                for (item in cartList){
-                    if (item._id == cartList[position]._id && item.Size == size){
+                for (item in cartList) {
+                    if (item._id == cartList[position]._id && item.Size == size) {
+                        isExist = true
                         item.quantity += cartList[position].quantity
                         cartList.removeAt(position)
                         break
                     }
                 }
-                Paper.book().write("cart",cartList)
+                if (!isExist) {
+                    cartList[position].Size = size
+                }
+                Paper.book().write("cart", cartList)
                 cartAdapter.setDataCart(cartList as ArrayList<Cart>)
             }
 
@@ -119,6 +123,16 @@ class CartFragment : Fragment() {
             requireContext(),
             LinearLayoutManager.VERTICAL,false
         )
+
+        binding.btnbuy.setOnClickListener {
+            if (cartList.isEmpty()){
+                Toast.makeText(context, "Giỏ hàng của bạn đang trống", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(context, DeliveryInformationActivity::class.java)
+                intent.putExtra("total", binding.txtmoney.text.toString().toInt())
+                startActivity(intent)
+            }
+        }
 
     }
 }

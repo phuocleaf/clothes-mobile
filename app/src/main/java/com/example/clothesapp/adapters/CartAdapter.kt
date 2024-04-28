@@ -17,7 +17,7 @@ import com.example.clothesapp.onclick.ChangeSizeInterface
 import com.example.clothesapp.utils.Utils
 
 class CartAdapter(private val changeNumListener: ChangeNumListener,
-                    private val changeSizeInterface: ChangeSizeInterface
+                  private val changeSizeInterface: ChangeSizeInterface
 ): RecyclerView.Adapter<CartAdapter.MyViewHolder>() {
 
     private var cartList = ArrayList<Cart>()

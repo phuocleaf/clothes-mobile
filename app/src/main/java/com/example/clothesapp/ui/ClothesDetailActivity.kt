@@ -50,6 +50,9 @@ class ClothesDetailActivity : AppCompatActivity() {
         list.add("L")
         list.add("XL")
 
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
         binding.txtClothesName.text = name
         binding.txtClothesPrice.text = price.toString()
         val imageURL = Utils.BASE_URL + "image/" + image

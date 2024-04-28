@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.clothesapp.R
 import com.example.clothesapp.databinding.FragmentProfileBinding
 import com.example.clothesapp.ui.MainActivity
+import com.example.clothesapp.ui.ReviewOrdersActivity
 import com.example.clothesapp.ui.SignUpActivity
 import io.paperdb.Paper
 
@@ -43,6 +44,11 @@ class ProfileFragment : Fragment() {
             Paper.book().delete("user_id")
             binding.tvUserName.text = ""
             val intent = Intent(requireContext(), SignUpActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.llOrderProcessing.setOnClickListener {
+            val intent = Intent(requireContext(), ReviewOrdersActivity::class.java)
             startActivity(intent)
         }
     }
