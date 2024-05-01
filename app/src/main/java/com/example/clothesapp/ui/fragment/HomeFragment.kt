@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clothesapp.adapters.ClothesAdapter
 import com.example.clothesapp.databinding.FragmentHomeBinding
+
 import com.example.clothesapp.model.ClothesItem
 import com.example.clothesapp.onclick.OnClickInterface
 import com.example.clothesapp.ui.ClothesDetailActivity

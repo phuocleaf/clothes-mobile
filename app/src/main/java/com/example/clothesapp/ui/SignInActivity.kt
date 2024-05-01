@@ -25,8 +25,14 @@ class SignInActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
 
+        Paper.init(this)
+        if(Paper.book().read<String>("user_id") != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnsignin.setOnClickListener{
-            viewModel.signIn(binding.etemail.text.toString(),binding.etpassword.text.toString())
+            viewModel.signIn(binding.etemail.text.toString().trim(),binding.etpassword.text.toString().trim())
             observeSignInStatus()
         }
 

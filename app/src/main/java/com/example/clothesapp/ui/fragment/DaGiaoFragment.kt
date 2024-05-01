@@ -1,60 +1,80 @@
 package com.example.clothesapp.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clothesapp.R
+import com.example.clothesapp.adapters.OrderAdapter
+import com.example.clothesapp.databinding.FragmentChoXacNhanBinding
+import com.example.clothesapp.databinding.FragmentDaGiaoBinding
+import com.example.clothesapp.model.ReviewOrderItem
+import com.example.clothesapp.onclick.OnClickInterface
+import com.example.clothesapp.ui.ReviewDetailOrderActivity
+import com.example.clothesapp.viewmodel.ReviewOrderViewModel
+import io.paperdb.Paper
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DaGiaoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DaGiaoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var binding: FragmentDaGiaoBinding
+    private lateinit var reviewOrderViewModel: ReviewOrderViewModel
+    private lateinit var orderAdapter: OrderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        reviewOrderViewModel = ViewModelProvider(this)[ReviewOrderViewModel::class.java]
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_da_giao, container, false)
+    ): View {
+        binding = FragmentDaGiaoBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DaGiaoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DaGiaoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        Paper.init(requireContext())
+        val userId = Paper.book().read("user_id", "").toString()
+        reviewOrderViewModel.getReviewOrder(userId,"Đã giao")
+        observerLiveData()
     }
+
+    private fun initView() {
+        orderAdapter = OrderAdapter(object: OnClickInterface{
+            override fun onClick(position: Int) {
+                val order = orderAdapter.getOrderAt(position)
+                val intent = Intent(requireContext(), ReviewDetailOrderActivity::class.java)
+                intent.putExtra("order_id", order._id)
+                intent.putExtra("order_user_name", order.userName)
+                intent.putExtra("order_user_address", order.userAddress)
+                intent.putExtra("order_user_phone", order.userPhone)
+                intent.putExtra("order_time", order.created_at)
+                intent.putExtra("order_note", order.userNote)
+                intent.putExtra("order_total", order.total)
+                startActivity(intent)
+                //requireActivity().finish()
+            }
+        })
+        binding.recyclerOrder.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = orderAdapter
+        }
+    }
+
+    private fun observerLiveData() {
+        reviewOrderViewModel.observerReviewOrderLiveData().observe(viewLifecycleOwner) {
+            orderAdapter.setDataOrder(it as ArrayList<ReviewOrderItem>)
+        }
+    }
+
+
 }

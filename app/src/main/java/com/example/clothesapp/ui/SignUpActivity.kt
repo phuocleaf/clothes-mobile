@@ -25,20 +25,16 @@ class SignUpActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
 
-        Paper.init(this)
-        if(Paper.book().read<String>("user_id") != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+
 
         binding.btnRegister.setOnClickListener{
 
             viewModel.signUp(
-                binding.etname.text.toString(),
-                binding.etemail.text.toString(),
-                binding.etpassword.text.toString(),
-                binding.etphone.text.toString(),
-                binding.etaddress.text.toString())
+                binding.etname.text.toString().trim(),
+                binding.etemail.text.toString().trim(),
+                binding.etpassword.text.toString().trim(),
+                binding.etphone.text.toString().trim(),
+                binding.etaddress.text.toString().trim())
             observeSignUpStatus()
 
         }

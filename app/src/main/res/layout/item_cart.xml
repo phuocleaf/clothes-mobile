@@ -33,7 +33,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/imgClothes"
             />
         <TextView
@@ -45,7 +44,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
-            android:textStyle="bold"
+
             app:layout_constraintStart_toEndOf="@id/imgClothes"
             />
 
@@ -57,7 +56,7 @@
             app:layout_constraintStart_toEndOf="@id/txtClothesPrice"
             app:layout_constraintTop_toBottomOf="@id/txtClothesName"
             android:layout_marginTop="12dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="17dp"
             />
 
 
@@ -81,7 +80,6 @@
             android:text="1"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/txtClothesName"
             app:layout_constraintEnd_toStartOf="@id/imgadd"
             android:layout_marginRight="10dp"

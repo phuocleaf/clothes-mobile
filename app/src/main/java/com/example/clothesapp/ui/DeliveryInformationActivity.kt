@@ -43,11 +43,15 @@ class DeliveryInformationActivity : AppCompatActivity() {
 
         binding.tvtotal.text = "Tổng tiền: $total"
 
+        binding.imageViewBack.setOnClickListener {
+            finish()
+        }
+
         binding.btnOrder.setOnClickListener {
-            val name = binding.etname.text.toString()
-            val phone = binding.etphone.text.toString()
-            val address = binding.etaddress.text.toString()
-            val note = binding.etnote.text.toString()
+            val name = binding.etname.text.toString().trim()
+            val phone = binding.etphone.text.toString().trim()
+            val address = binding.etaddress.text.toString().trim()
+            val note = binding.etnote.text.toString().trim()
 
             createOrderViewModel = ViewModelProvider(this)[CreateOrderViewModel::class.java]
             createOrderViewModel.createOrder(
