@@ -17,6 +17,7 @@ import com.example.clothesapp.onclick.ChangeSizeInterface
 import com.example.clothesapp.ui.DeliveryInformationActivity
 import io.paperdb.Paper
 import java.util.Objects
+import kotlin.math.min
 
 class CartFragment : Fragment() {
 
@@ -104,7 +105,7 @@ class CartFragment : Fragment() {
                 for (item in cartList) {
                     if (item._id == cartList[position]._id && item.Size == size) {
                         isExist = true
-                        item.quantity += cartList[position].quantity
+                        item.quantity = min(item.quantity + cartList[position].quantity, 5)
                         cartList.removeAt(position)
                         break
                     }

@@ -49,6 +49,14 @@ class ChoXacNhanFragment : Fragment() {
         observerLiveData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Paper.init(requireContext())
+        val userId = Paper.book().read("user_id", "").toString()
+        reviewOrderViewModel.getReviewOrder(userId,"Chờ xác nhận")
+        observerLiveData()
+    }
+
     private fun initView() {
         orderAdapter = OrderAdapter(object: OnClickInterface{
             override fun onClick(position: Int) {

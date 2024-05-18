@@ -59,6 +59,7 @@ class UpdateUserInfoActivity : AppCompatActivity() {
     private fun observeUpdateUserInfoStatus() {
         val updateUserInfoObserver = Observer<Boolean> { isUpdateUserInfo ->
             if (isUpdateUserInfo) {
+                Paper.book().write("user_name", binding.etname.text.toString().trim())
                 Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, UserInfoActivity::class.java)
                 startActivity(intent)
