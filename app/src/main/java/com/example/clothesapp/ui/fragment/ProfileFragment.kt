@@ -38,6 +38,11 @@ class ProfileFragment : Fragment() {
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initView()
+    }
+
     private fun initView() {
         Paper.init(requireContext())
         val userName = Paper.book().read("user_name", "")
